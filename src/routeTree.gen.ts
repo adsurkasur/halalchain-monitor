@@ -16,6 +16,12 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppTrackingRouteImport } from './routes/app/tracking'
+import { Route as AppSettingsRouteImport } from './routes/app/settings'
+import { Route as AppScanRouteImport } from './routes/app/scan'
+import { Route as AppProfileRouteImport } from './routes/app/profile'
+import { Route as AppHistoryRouteImport } from './routes/app/history'
+import { Route as AppAlertsRouteImport } from './routes/app/alerts'
 import { Route as AppShipmentsIndexRouteImport } from './routes/app/shipments/index'
 import { Route as AppShipmentsNewRouteImport } from './routes/app/shipments/new'
 import { Route as AppShipmentsIdRouteImport } from './routes/app/shipments/$id'
@@ -55,6 +61,36 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTrackingRoute = AppTrackingRouteImport.update({
+  id: '/tracking',
+  path: '/tracking',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScanRoute = AppScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAlertsRoute = AppAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppShipmentsIndexRoute = AppShipmentsIndexRouteImport.update({
   id: '/shipments/',
   path: '/shipments/',
@@ -78,6 +114,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/tracking': typeof AppTrackingRoute
   '/app/': typeof AppIndexRoute
   '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments/new': typeof AppShipmentsNewRoute
@@ -89,6 +131,12 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/tracking': typeof AppTrackingRoute
   '/app': typeof AppIndexRoute
   '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments/new': typeof AppShipmentsNewRoute
@@ -102,6 +150,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
+  '/app/alerts': typeof AppAlertsRoute
+  '/app/history': typeof AppHistoryRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/scan': typeof AppScanRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/tracking': typeof AppTrackingRoute
   '/app/': typeof AppIndexRoute
   '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments/new': typeof AppShipmentsNewRoute
@@ -116,6 +170,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/features'
     | '/login'
+    | '/app/alerts'
+    | '/app/history'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/tracking'
     | '/app/'
     | '/app/shipments/$id'
     | '/app/shipments/new'
@@ -127,6 +187,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/features'
     | '/login'
+    | '/app/alerts'
+    | '/app/history'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/tracking'
     | '/app'
     | '/app/shipments/$id'
     | '/app/shipments/new'
@@ -139,6 +205,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/features'
     | '/login'
+    | '/app/alerts'
+    | '/app/history'
+    | '/app/profile'
+    | '/app/scan'
+    | '/app/settings'
+    | '/app/tracking'
     | '/app/'
     | '/app/shipments/$id'
     | '/app/shipments/new'
@@ -205,6 +277,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/tracking': {
+      id: '/app/tracking'
+      path: '/tracking'
+      fullPath: '/app/tracking'
+      preLoaderRoute: typeof AppTrackingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/scan': {
+      id: '/app/scan'
+      path: '/scan'
+      fullPath: '/app/scan'
+      preLoaderRoute: typeof AppScanRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/history': {
+      id: '/app/history'
+      path: '/history'
+      fullPath: '/app/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/alerts': {
+      id: '/app/alerts'
+      path: '/alerts'
+      fullPath: '/app/alerts'
+      preLoaderRoute: typeof AppAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/shipments/': {
       id: '/app/shipments/'
       path: '/shipments'
@@ -230,6 +344,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAlertsRoute: typeof AppAlertsRoute
+  AppHistoryRoute: typeof AppHistoryRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppScanRoute: typeof AppScanRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppTrackingRoute: typeof AppTrackingRoute
   AppIndexRoute: typeof AppIndexRoute
   AppShipmentsIdRoute: typeof AppShipmentsIdRoute
   AppShipmentsNewRoute: typeof AppShipmentsNewRoute
@@ -237,6 +357,12 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAlertsRoute: AppAlertsRoute,
+  AppHistoryRoute: AppHistoryRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppScanRoute: AppScanRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppTrackingRoute: AppTrackingRoute,
   AppIndexRoute: AppIndexRoute,
   AppShipmentsIdRoute: AppShipmentsIdRoute,
   AppShipmentsNewRoute: AppShipmentsNewRoute,
