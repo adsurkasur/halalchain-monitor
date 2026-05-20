@@ -17,6 +17,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppShipmentsIndexRouteImport } from './routes/app/shipments/index'
+import { Route as AppShipmentsIdRouteImport } from './routes/app/shipments/$id'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -58,6 +59,11 @@ const AppShipmentsIndexRoute = AppShipmentsIndexRouteImport.update({
   path: '/shipments/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppShipmentsIdRoute = AppShipmentsIdRouteImport.update({
+  id: '/shipments/$id',
+  path: '/shipments/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app/': typeof AppIndexRoute
+  '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments/': typeof AppShipmentsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app': typeof AppIndexRoute
+  '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments': typeof AppShipmentsIndexRoute
 }
 export interface FileRoutesById {
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app/': typeof AppIndexRoute
+  '/app/shipments/$id': typeof AppShipmentsIdRoute
   '/app/shipments/': typeof AppShipmentsIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/login'
     | '/app/'
+    | '/app/shipments/$id'
     | '/app/shipments/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/login'
     | '/app'
+    | '/app/shipments/$id'
     | '/app/shipments'
   id:
     | '__root__'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/login'
     | '/app/'
+    | '/app/shipments/$id'
     | '/app/shipments/'
   fileRoutesById: FileRoutesById
 }
@@ -188,16 +200,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppShipmentsIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/shipments/$id': {
+      id: '/app/shipments/$id'
+      path: '/shipments/$id'
+      fullPath: '/app/shipments/$id'
+      preLoaderRoute: typeof AppShipmentsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppShipmentsIdRoute: typeof AppShipmentsIdRoute
   AppShipmentsIndexRoute: typeof AppShipmentsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppShipmentsIdRoute: AppShipmentsIdRoute,
   AppShipmentsIndexRoute: AppShipmentsIndexRoute,
 }
 
