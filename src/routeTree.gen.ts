@@ -16,6 +16,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppShipmentsIndexRouteImport } from './routes/app/shipments/index'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -52,6 +53,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppShipmentsIndexRoute = AppShipmentsIndexRouteImport.update({
+  id: '/shipments/',
+  path: '/shipments/',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app/': typeof AppIndexRoute
+  '/app/shipments/': typeof AppShipmentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app': typeof AppIndexRoute
+  '/app/shipments': typeof AppShipmentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/login': typeof LoginRoute
   '/app/': typeof AppIndexRoute
+  '/app/shipments/': typeof AppShipmentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -90,8 +99,16 @@ export interface FileRouteTypes {
     | '/features'
     | '/login'
     | '/app/'
+    | '/app/shipments/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/features' | '/login' | '/app'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/features'
+    | '/login'
+    | '/app'
+    | '/app/shipments'
   id:
     | '__root__'
     | '/'
@@ -101,6 +118,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/login'
     | '/app/'
+    | '/app/shipments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -163,15 +181,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/shipments/': {
+      id: '/app/shipments/'
+      path: '/shipments'
+      fullPath: '/app/shipments/'
+      preLoaderRoute: typeof AppShipmentsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppShipmentsIndexRoute: typeof AppShipmentsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppShipmentsIndexRoute: AppShipmentsIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
