@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { useState } from "react";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { Button } from "@/components/ui/button";
@@ -6,8 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Check, ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react";
-
-export const Route = createFileRoute("/app/shipments/new")({ component: NewShipment });
 
 const STEPS = [
   { t: "Sender", d: "Origin & contact" },
@@ -19,7 +19,7 @@ const STEPS = [
   { t: "Generate", d: "Issue shipment ID" },
 ];
 
-function NewShipment() {
+export default function NewShipment() {
   const [step, setStep] = useState(0);
   const next = () => setStep((s) => Math.min(STEPS.length - 1, s + 1));
   const prev = () => setStep((s) => Math.max(0, s - 1));
@@ -137,8 +137,8 @@ function NewShipment() {
                   <p className="mt-1 text-sm text-muted-foreground">SHP-24826 issued · STELINA mirror queued · RFID bound.</p>
                 </div>
                 <div className="flex gap-2">
-                  <Link to="/app/shipments"><Button variant="outline">Back to shipments</Button></Link>
-                  <Link to="/app/shipments/$id" params={{ id: "SHP-24819" }}><Button>Open shipment</Button></Link>
+                  <Link href="/app/shipments"><Button variant="outline">Back to shipments</Button></Link>
+                  <Link href="/app/shipments/SHP-24819"><Button>Open shipment</Button></Link>
                 </div>
               </div>
             )}

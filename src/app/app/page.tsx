@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { TrackingMap } from "@/components/dashboard/tracking-map";
@@ -7,9 +9,7 @@ import { Button } from "@/components/ui/button";
 import { kpis, shipments, alerts, timeline } from "@/lib/mock-data";
 import { Download, Plus, Thermometer, Droplets, ShieldCheck, AlertTriangle } from "lucide-react";
 
-export const Route = createFileRoute("/app/")({ component: Overview });
-
-function Overview() {
+export default function Overview() {
   return (
     <DashboardLayout
       title="Operations Overview"
@@ -17,7 +17,7 @@ function Overview() {
       actions={
         <>
           <Button variant="outline" size="sm" className="gap-2"><Download className="h-4 w-4" /> Export</Button>
-          <Link to="/app/shipments/new"><Button size="sm" className="gap-2"><Plus className="h-4 w-4" /> New shipment</Button></Link>
+          <Link href="/app/shipments/new"><Button size="sm" className="gap-2"><Plus className="h-4 w-4" /> New shipment</Button></Link>
         </>
       }
     >
@@ -33,7 +33,7 @@ function Overview() {
               <h2 className="text-sm font-semibold">Active shipments</h2>
               <p className="text-xs text-muted-foreground">Real-time operational state across the fleet.</p>
             </div>
-            <Link to="/app/shipments" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            <Link href="/app/shipments" className="text-xs font-medium text-primary hover:underline">View all →</Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -51,7 +51,7 @@ function Overview() {
               <tbody>
                 {shipments.slice(0, 6).map((s) => (
                   <tr key={s.id} className="border-b border-border last:border-0 hover:bg-surface-muted/60">
-                    <td className="px-5 py-3"><Link to="/app/shipments/$id" params={{ id: s.id }} className="font-mono text-xs font-semibold text-primary hover:underline">{s.id}</Link></td>
+                    <td className="px-5 py-3"><Link href={`/app/shipments/${s.id}`} className="font-mono text-xs font-semibold text-primary hover:underline">{s.id}</Link></td>
                     <td className="px-3 py-3"><div className="font-medium">{s.product}</div><div className="text-xs text-muted-foreground">{s.weightKg.toLocaleString()} kg</div></td>
                     <td className="px-3 py-3 text-xs text-muted-foreground"><div className="truncate max-w-[180px]">{s.origin}</div><div className="truncate max-w-[180px]">→ {s.destination}</div></td>
                     <td className="px-3 py-3 font-mono tabular-nums">{s.tempC.toFixed(1)}°C</td>
@@ -70,7 +70,7 @@ function Overview() {
           <div className="rounded-xl border border-border bg-surface p-3 shadow-card">
             <div className="flex items-center justify-between px-2 pt-1 pb-2">
               <div className="text-sm font-semibold">Live fleet map</div>
-              <Link to="/app/tracking" className="text-xs font-medium text-primary hover:underline">Expand →</Link>
+              <Link href="/app/tracking" className="text-xs font-medium text-primary hover:underline">Expand →</Link>
             </div>
             <TrackingMap className="aspect-[4/3]" compact />
           </div>
@@ -105,7 +105,7 @@ function Overview() {
         <div className="rounded-xl border border-border bg-surface shadow-card">
           <div className="flex items-center justify-between border-b border-border px-5 py-4">
             <div className="flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-status-warning" /><h2 className="text-sm font-semibold">Operational alerts</h2></div>
-            <Link to="/app/alerts" className="text-xs font-medium text-primary hover:underline">All alerts →</Link>
+            <Link href="/app/alerts" className="text-xs font-medium text-primary hover:underline">All alerts →</Link>
           </div>
           <ul className="divide-y divide-border">
             {alerts.slice(0, 5).map((a) => (
@@ -143,10 +143,10 @@ function Overview() {
       {/* Sensor strip */}
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {[
-          { i: Thermometer, l: "Avg fleet temperature", v: "-17.8°C", d: "Within profile · -22 to -16°C", tone: "safe" },
-          { i: Droplets, l: "Avg humidity", v: "82%", d: "Stable across reefers", tone: "safe" },
-          { i: ShieldCheck, l: "Halal seal integrity", v: "98.4%", d: "3 seals require review", tone: "warning" },
-        ].map((m: any) => (
+          { i: Thermometer, l: "Avg fleet temperature", v: "-17.8°C", d: "Within profile · -22 to -16°C", tone: "safe" as const },
+          { i: Droplets, l: "Avg humidity", v: "82%", d: "Stable across reefers", tone: "safe" as const },
+          { i: ShieldCheck, l: "Halal seal integrity", v: "98.4%", d: "3 seals require review", tone: "warning" as const },
+        ].map((m) => (
           <div key={m.l} className="rounded-xl border border-border bg-surface p-5 shadow-card">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground"><m.i className="h-4 w-4" /> {m.l}</div>

@@ -1,12 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
+
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { StatusBadge, statusTone } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { alerts } from "@/lib/mock-data";
 import { Search, Bell, Thermometer, Droplets, Signal, Route as RouteIcon, ShieldAlert } from "lucide-react";
-
-export const Route = createFileRoute("/app/alerts")({ component: Alerts });
 
 const ICON: Record<string, any> = {
   "Temperature Spike": Thermometer,
@@ -17,7 +16,7 @@ const ICON: Record<string, any> = {
   "Checkpoint Reached": Bell,
 };
 
-function Alerts() {
+export default function Alerts() {
   return (
     <DashboardLayout title="Operational alerts" subtitle="Threshold breaches, sensor health, and integrity events.">
       <div className="grid gap-4 md:grid-cols-3">

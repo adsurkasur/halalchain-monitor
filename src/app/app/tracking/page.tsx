@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { TrackingMap } from "@/components/dashboard/tracking-map";
 import { StatusBadge, statusTone } from "@/components/status-badge";
@@ -7,9 +9,7 @@ import { Input } from "@/components/ui/input";
 import { shipments } from "@/lib/mock-data";
 import { Search, Filter, Layers, Thermometer, Droplets, Navigation } from "lucide-react";
 
-export const Route = createFileRoute("/app/tracking")({ component: Tracking });
-
-function Tracking() {
+export default function Tracking() {
   return (
     <DashboardLayout title="Live tracking" subtitle="Real-time fleet, route, and shipment telemetry.">
       <div className="grid gap-4 lg:grid-cols-[320px_1fr_320px] h-[calc(100vh-260px)]">
@@ -26,7 +26,7 @@ function Tracking() {
           <ul className="flex-1 divide-y divide-border overflow-y-auto">
             {shipments.map((s, i) => (
               <li key={s.id}>
-                <Link to="/app/shipments/$id" params={{ id: s.id }} className={`block px-3 py-3 transition-colors hover:bg-surface-muted ${i === 0 ? "bg-accent" : ""}`}>
+                <Link href={`/app/shipments/${s.id}`} className={`block px-3 py-3 transition-colors hover:bg-surface-muted ${i === 0 ? "bg-accent" : ""}`}>
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs font-semibold text-primary">{s.id}</span>
                     <StatusBadge tone={statusTone(s.status)}>{s.status}</StatusBadge>
@@ -75,11 +75,11 @@ function Tracking() {
           <div className="mt-5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Sensor health</div>
           <ul className="mt-2 space-y-2 text-sm">
             {[
-              { l: "GPS", t: "safe", v: "Strong · ±4m" },
-              { l: "Temperature", t: "safe", v: "-18.4°C" },
-              { l: "Humidity", t: "safe", v: "82%" },
-              { l: "RFID tag", t: "safe", v: "RFID-AC8821-09F" },
-            ].map((x: any) => (
+              { l: "GPS", t: "safe" as const, v: "Strong · ±4m" },
+              { l: "Temperature", t: "safe" as const, v: "-18.4°C" },
+              { l: "Humidity", t: "safe" as const, v: "82%" },
+              { l: "RFID tag", t: "safe" as const, v: "RFID-AC8821-09F" },
+            ].map((x) => (
               <li key={x.l} className="flex items-center justify-between rounded-lg border border-border bg-surface-muted px-3 py-2">
                 <span>{x.l}</span>
                 <span className="flex items-center gap-2 text-xs text-muted-foreground">{x.v}<StatusBadge tone={x.t}>OK</StatusBadge></span>

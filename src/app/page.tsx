@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { MarketingLayout } from "@/components/marketing/marketing-layout";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,9 +16,7 @@ import {
 } from "lucide-react";
 import { TrackingMap } from "@/components/dashboard/tracking-map";
 
-export const Route = createFileRoute("/")({ component: Landing });
-
-function Landing() {
+export default function Landing() {
   return (
     <MarketingLayout>
       {/* Hero */}
@@ -44,8 +42,8 @@ function Landing() {
               built for halal integrity assurance.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link to="/app"><Button size="lg" className="gap-2">Launch operations console <ArrowRight className="h-4 w-4" /></Button></Link>
-              <Link to="/features"><Button size="lg" variant="outline">Explore features</Button></Link>
+              <Link href="/app"><Button size="lg" className="gap-2">Launch operations console <ArrowRight className="h-4 w-4" /></Button></Link>
+              <Link href="/features"><Button size="lg" variant="outline">Explore features</Button></Link>
             </div>
             <div className="mt-10 grid max-w-md grid-cols-3 gap-6">
               {[
@@ -273,7 +271,7 @@ function Landing() {
                 { i: Activity, t: "Incident MTTR" },
                 { i: BarChart3, t: "Route profitability" },
                 { i: ShieldCheck, t: "Integrity scorecard" },
-                { i: Truck, t: "Reefer utilization" },
+                { i: Truck, t: "Ree tracking" },
               ].map((x) => (
                 <li key={x.t} className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm">
                   <x.i className="h-4 w-4 text-primary" /> {x.t}
@@ -290,8 +288,8 @@ function Landing() {
           <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">Bring every shipment under one operational lens.</h2>
           <p className="mt-4 text-base text-muted-foreground md:text-lg">Designed for fishery exporters, cold storage operators, and receivers who treat halal integrity as a non-negotiable.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/app"><Button size="lg" className="gap-2">Open the console <ArrowRight className="h-4 w-4" /></Button></Link>
-            <Link to="/contact"><Button size="lg" variant="outline">Talk to operations</Button></Link>
+            <Link href="/app"><Button size="lg" className="gap-2">Open the console <ArrowRight className="h-4 w-4" /></Button></Link>
+            <Link href="/contact"><Button size="lg" variant="outline">Talk to operations</Button></Link>
           </div>
         </div>
       </section>

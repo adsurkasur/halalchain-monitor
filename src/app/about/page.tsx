@@ -1,18 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { MarketingLayout } from "@/components/marketing/marketing-layout";
 import { Anchor, ShieldCheck, Target } from "lucide-react";
+import type { Metadata } from "next";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [
-    { title: "About — HalalChain" },
-    { name: "description", content: "Why we built HalalChain — a halal cold chain traceability platform for Indonesia's fish logistics." },
-    { property: "og:title", content: "About — HalalChain" },
-    { property: "og:description", content: "Why we built HalalChain — a halal cold chain traceability platform for Indonesia's fish logistics." },
-  ]}),
-  component: About,
-});
+export const metadata: Metadata = {
+  title: "About — HalalChain",
+  description: "Why we built HalalChain — a halal cold chain traceability platform for Indonesia's fish logistics.",
+  openGraph: {
+    title: "About — HalalChain",
+    description: "Why we built HalalChain — a halal cold chain traceability platform for Indonesia's fish logistics.",
+  }
+};
 
-function About() {
+export default function About() {
   return (
     <MarketingLayout>
       <section className="border-b border-border bg-surface-muted">

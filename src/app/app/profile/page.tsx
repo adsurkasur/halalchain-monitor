@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
+
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,9 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ShieldCheck } from "lucide-react";
 
-export const Route = createFileRoute("/app/profile")({ component: Profile });
-
-function Profile() {
+export default function Profile() {
   return (
     <DashboardLayout title="Profile" subtitle="Company and operator details.">
       <div className="grid gap-4 lg:grid-cols-3">

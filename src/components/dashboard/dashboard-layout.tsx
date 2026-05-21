@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutGrid,
   Package,
@@ -21,27 +24,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { to: "/app", label: "Overview", icon: LayoutGrid, exact: true },
-  { to: "/app/shipments", label: "Shipments", icon: Package },
-  { to: "/app/tracking", label: "Tracking", icon: Map },
-  { to: "/app/scan", label: "Scan Validation", icon: ScanLine },
-  { to: "/app/alerts", label: "Alerts", icon: Bell, badge: 5 },
-  { to: "/app/history", label: "History", icon: History },
+  { href: "/app", label: "Overview", icon: LayoutGrid, exact: true },
+  { href: "/app/shipments", label: "Shipments", icon: Package },
+  { href: "/app/tracking", label: "Tracking", icon: Map },
+  { href: "/app/scan", label: "Scan Validation", icon: ScanLine },
+  { href: "/app/alerts", label: "Alerts", icon: Bell, badge: 5 },
+  { href: "/app/history", label: "History", icon: History },
 ];
 
 const ACCOUNT = [
-  { to: "/app/profile", label: "Profile", icon: User },
-  { to: "/app/settings", label: "Settings", icon: Settings },
+  { href: "/app/profile", label: "Profile", icon: User },
+  { href: "/app/settings", label: "Settings", icon: Settings },
 ];
 
-export function DashboardLayout({ children, title, subtitle, actions }: { children: React.ReactNode; title?: string; subtitle?: string; actions?: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathname: string }) {
+  const isActive = (href: string, exact?: boolean) => (exact ? pathname === href : pathname === href || pathname.startsWith(href + "/"));
 
-  const isActive = (to: string, exact?: boolean) => (exact ? pathname === to : pathname === to || pathname.startsWith(to + "/"));
-
-  const Sidebar = (
+  return (
     <aside className={cn("flex h-full flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-200", collapsed ? "w-[68px]" : "w-64")}>
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-4">
         {collapsed ? (
@@ -56,11 +55,11 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
         {!collapsed && <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">Operations</div>}
         <ul className="space-y-0.5">
           {NAV.map((item) => {
-            const active = isActive(item.to, item.exact);
+            const active = isActive(item.href, item.exact);
             return (
-              <li key={item.to}>
+              <li key={item.href}>
                 <Link
-                  to={item.to}
+                  href={item.href}
                   className={cn(
                     "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
                     active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
@@ -79,10 +78,10 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
         {!collapsed && <div className="mt-6 mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">Account</div>}
         <ul className="space-y-0.5">
           {ACCOUNT.map((item) => {
-            const active = isActive(item.to);
+            const active = isActive(item.href);
             return (
-              <li key={item.to}>
-                <Link to={item.to} className={cn("flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors", active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground")}>
+              <li key={item.href}>
+                <Link href={item.href} className={cn("flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors", active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground")}>
                   <item.icon className="h-4 w-4 shrink-0" />
                   {!collapsed && <span>{item.label}</span>}
                 </Link>
@@ -106,14 +105,24 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
       </div>
     </aside>
   );
+}
+
+export function DashboardLayout({ children, title, subtitle, actions }: { children: React.ReactNode; title?: string; subtitle?: string; actions?: React.ReactNode }) {
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname() || "";
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background text-foreground">
-      <div className="hidden md:block">{Sidebar}</div>
+      <div className="hidden md:block">
+        <SidebarComponent collapsed={collapsed} pathname={pathname} />
+      </div>
       {mobileOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
-          <div className="absolute left-0 top-0 h-full">{Sidebar}</div>
+          <div className="absolute left-0 top-0 h-full">
+            <SidebarComponent collapsed={collapsed} pathname={pathname} />
+          </div>
         </div>
       )}
 

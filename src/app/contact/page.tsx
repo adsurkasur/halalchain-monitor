@@ -1,22 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { MarketingLayout } from "@/components/marketing/marketing-layout";
 import { Mail, Phone, MapPin, Building2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import type { Metadata } from "next";
 
-export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [
-    { title: "Contact — HalalChain" },
-    { name: "description", content: "Talk to the HalalChain operations team about deploying halal cold chain traceability." },
-    { property: "og:title", content: "Contact — HalalChain" },
-    { property: "og:description", content: "Talk to the HalalChain operations team about deploying halal cold chain traceability." },
-  ]}),
-  component: Contact,
-});
+export const metadata: Metadata = {
+  title: "Contact — HalalChain",
+  description: "Talk to the HalalChain operations team about deploying halal cold chain traceability.",
+  openGraph: {
+    title: "Contact — HalalChain",
+    description: "Talk to the HalalChain operations team about deploying halal cold chain traceability.",
+  }
+};
 
-function Contact() {
+export default function Contact() {
   return (
     <MarketingLayout>
       <section className="border-b border-border bg-surface-muted">

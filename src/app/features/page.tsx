@@ -1,16 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { MarketingLayout } from "@/components/marketing/marketing-layout";
 import { MapPin, Thermometer, Droplets, Radio, ShieldCheck, Database, Bell, BarChart3, Users, FileCheck, Workflow, Smartphone } from "lucide-react";
+import type { Metadata } from "next";
 
-export const Route = createFileRoute("/features")({
-  head: () => ({ meta: [
-    { title: "Features — HalalChain" },
-    { name: "description", content: "GPS, temperature, humidity, RFID/NFC, STELINA integration — every capability in HalalChain." },
-    { property: "og:title", content: "Features — HalalChain" },
-    { property: "og:description", content: "GPS, temperature, humidity, RFID/NFC, STELINA integration — every capability in HalalChain." },
-  ]}),
-  component: Features,
-});
+export const metadata: Metadata = {
+  title: "Features — HalalChain",
+  description: "GPS, temperature, humidity, RFID/NFC, STELINA integration — every capability in HalalChain.",
+  openGraph: {
+    title: "Features — HalalChain",
+    description: "GPS, temperature, humidity, RFID/NFC, STELINA integration — every capability in HalalChain.",
+  }
+};
 
 const GROUPS = [
   { title: "Real-time monitoring", items: [
@@ -35,7 +34,7 @@ const GROUPS = [
   ]},
 ];
 
-function Features() {
+export default function Features() {
   return (
     <MarketingLayout>
       <section className="border-b border-border bg-surface-muted">

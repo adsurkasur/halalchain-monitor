@@ -54,7 +54,6 @@ export function statusTone(s: string): Tone {
   if (s === "Warning") return "warning";
   if (s === "Risk Detected") return "critical";
   if (s === "Critical") return "critical";
-  if (s === "Warning") return "warning";
   if (s === "Info") return "active";
   return "neutral";
 }

@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
+
 import { useState } from "react";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { StatusBadge } from "@/components/status-badge";
@@ -7,9 +8,7 @@ import { ScanLine, CheckCircle2, AlertTriangle, XCircle, Smartphone, QrCode, Shi
 
 type Result = "idle" | "success" | "warning" | "mismatch";
 
-export const Route = createFileRoute("/app/scan")({ component: Scan });
-
-function Scan() {
+export default function Scan() {
   const [result, setResult] = useState<Result>("idle");
 
   return (
@@ -19,7 +18,7 @@ function Scan() {
         <div className="rounded-xl border border-border bg-surface p-6 shadow-card">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-sm font-semibold"><ScanLine className="h-4 w-4 text-primary" />Validation Terminal</div>
-            <div className="flex gap-2"><Button variant="outline" size="sm">Reset</Button></div>
+            <div className="flex gap-2"><Button variant="outline" size="sm" onClick={() => setResult("idle")}>Reset</Button></div>
           </div>
 
           <div className="mt-6 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-surface-muted py-16">

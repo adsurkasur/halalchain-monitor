@@ -1,4 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { TrackingMap } from "@/components/dashboard/tracking-map";
 import { StatusBadge, statusTone } from "@/components/status-badge";
@@ -10,10 +13,9 @@ import {
 } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid, AreaChart, Area } from "recharts";
 
-export const Route = createFileRoute("/app/shipments/$id")({ component: Detail });
-
-function Detail() {
-  const { id } = Route.useParams();
+export default function Detail() {
+  const params = useParams();
+  const id = params.id as string;
   const s = shipments.find((x) => x.id === id) ?? shipments[0];
 
   return (
@@ -22,7 +24,7 @@ function Detail() {
       subtitle={`${s.product} · ${s.weightKg.toLocaleString()} kg · ${s.stelinaRef}`}
       actions={
         <>
-          <Link to="/app/shipments"><Button variant="outline" size="sm" className="gap-2"><ArrowLeft className="h-4 w-4" />Back</Button></Link>
+          <Link href="/app/shipments"><Button variant="outline" size="sm" className="gap-2"><ArrowLeft className="h-4 w-4" />Back</Button></Link>
           <Button variant="outline" size="sm" className="gap-2"><FileText className="h-4 w-4" />Audit report</Button>
           <Button size="sm" className="gap-2"><Share2 className="h-4 w-4" />Share live link</Button>
         </>

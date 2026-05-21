@@ -1,4 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { StatusBadge, statusTone } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
@@ -6,9 +8,7 @@ import { Input } from "@/components/ui/input";
 import { shipments } from "@/lib/mock-data";
 import { Plus, Filter, Download, Search } from "lucide-react";
 
-export const Route = createFileRoute("/app/shipments/")({ component: Shipments });
-
-function Shipments() {
+export default function Shipments() {
   return (
     <DashboardLayout
       title="Shipments"
@@ -16,7 +16,7 @@ function Shipments() {
       actions={
         <>
           <Button variant="outline" size="sm" className="gap-2"><Download className="h-4 w-4" />Export</Button>
-          <Link to="/app/shipments/new"><Button size="sm" className="gap-2"><Plus className="h-4 w-4" />New shipment</Button></Link>
+          <Link href="/app/shipments/new"><Button size="sm" className="gap-2"><Plus className="h-4 w-4" />New shipment</Button></Link>
         </>
       }
     >
@@ -51,7 +51,7 @@ function Shipments() {
             <tbody>
               {shipments.map((s) => (
                 <tr key={s.id} className="border-b border-border last:border-0 hover:bg-surface-muted/60">
-                  <td className="px-5 py-3"><Link to="/app/shipments/$id" params={{ id: s.id }} className="font-mono text-xs font-semibold text-primary hover:underline">{s.id}</Link><div className="text-[11px] text-muted-foreground">{s.stelinaRef}</div></td>
+                  <td className="px-5 py-3"><Link href={`/app/shipments/${s.id}`} className="font-mono text-xs font-semibold text-primary hover:underline">{s.id}</Link><div className="text-[11px] text-muted-foreground">{s.stelinaRef}</div></td>
                   <td className="px-3 py-3"><div className="font-medium">{s.product}</div><div className="text-xs text-muted-foreground">{s.weightKg.toLocaleString()} kg</div></td>
                   <td className="px-3 py-3 text-xs text-muted-foreground"><div className="max-w-[200px] truncate">{s.origin}</div><div className="max-w-[200px] truncate">→ {s.destination}</div></td>
                   <td className="px-3 py-3 text-xs"><div className="font-medium text-foreground">{s.driver}</div><div className="text-muted-foreground">{s.vehicle}</div></td>

@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+"use client";
+
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout";
 import { StatusBadge, statusTone } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
@@ -6,11 +7,9 @@ import { Input } from "@/components/ui/input";
 import { shipments } from "@/lib/mock-data";
 import { Search, Download, Filter, FileText } from "lucide-react";
 
-export const Route = createFileRoute("/app/history")({ component: History });
-
 const HISTORY = [...shipments, ...shipments].map((s, i) => ({ ...s, id: `SHP-24${800 - i}`, status: "Delivered" as const, integrity: "Maintained" as const, eta: `2026-05-${10 + (i % 8)} ${10 + (i % 10)}:30` }));
 
-function History() {
+export default function History() {
   return (
     <DashboardLayout title="Shipment history" subtitle="Searchable archive of delivered shipments with full audit trail." actions={<><Button variant="outline" size="sm" className="gap-2"><Download className="h-4 w-4" />Export CSV</Button><Button variant="outline" size="sm" className="gap-2"><FileText className="h-4 w-4" />Audit report</Button></>}>
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-surface p-3 shadow-card">

@@ -1,26 +1,24 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ShieldCheck, ArrowRight, Anchor } from "lucide-react";
+import type { Metadata } from "next";
 
-export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [
-    { title: "Sign in — HalalChain" },
-    { name: "description", content: "Sign in to the HalalChain operations console." },
-  ]}),
-  component: Login,
-});
+export const metadata: Metadata = {
+  title: "Sign in — HalalChain",
+  description: "Sign in to the HalalChain operations console.",
+};
 
-function Login() {
+export default function Login() {
   return (
     <div className="grid min-h-screen md:grid-cols-2">
       {/* Branding panel */}
       <div className="relative hidden flex-col justify-between overflow-hidden bg-sidebar p-10 text-sidebar-foreground md:flex">
         <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "20px 20px" }} />
-        <Link to="/"><BrandLogo variant="light" /></Link>
+        <Link href="/"><BrandLogo variant="light" /></Link>
         <div className="relative z-10">
           <ShieldCheck className="h-10 w-10 text-sidebar-primary" />
           <h2 className="mt-6 max-w-md text-3xl font-semibold tracking-tight">Operational trust for halal cold chain logistics.</h2>
@@ -37,7 +35,7 @@ function Login() {
       {/* Form panel */}
       <div className="flex items-center justify-center bg-background p-6 md:p-10">
         <div className="w-full max-w-md">
-          <div className="md:hidden mb-8"><Link to="/"><BrandLogo /></Link></div>
+          <div className="md:hidden mb-8"><Link href="/"><BrandLogo /></Link></div>
           <h1 className="text-2xl font-semibold tracking-tight">Sign in to the console</h1>
           <p className="mt-1.5 text-sm text-muted-foreground">Welcome back. Resume operational monitoring.</p>
 
@@ -49,12 +47,12 @@ function Login() {
             <div>
               <div className="flex items-center justify-between">
                 <Label>Password</Label>
-                <Link to="/login" className="text-xs font-medium text-primary hover:underline">Forgot password?</Link>
+                <a href="#" className="text-xs font-medium text-primary hover:underline" onClick={(e) => e.preventDefault()}>Forgot password?</a>
               </div>
               <Input className="mt-1.5" type="password" placeholder="••••••••" />
             </div>
             <label className="flex items-center gap-2 text-sm text-muted-foreground"><Checkbox /> Keep me signed in for 30 days</label>
-            <Link to="/app" className="block"><Button type="button" className="w-full gap-2" size="lg">Sign in <ArrowRight className="h-4 w-4" /></Button></Link>
+            <Link href="/app" className="block"><Button type="button" className="w-full gap-2" size="lg">Sign in <ArrowRight className="h-4 w-4" /></Button></Link>
           </form>
 
           <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
@@ -63,7 +61,7 @@ function Login() {
           <Button variant="outline" className="w-full">Continue with SSO</Button>
 
           <div className="mt-8 text-center text-xs text-muted-foreground">
-            New to HalalChain? <Link to="/contact" className="font-medium text-primary hover:underline">Talk to operations</Link>
+            New to HalalChain? <Link href="/contact" className="font-medium text-primary hover:underline">Talk to operations</Link>
           </div>
         </div>
       </div>
