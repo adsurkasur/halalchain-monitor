@@ -68,7 +68,7 @@ export default function Detail() {
               <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-status-critical" /> Alert</span>
             </div>
           </div>
-          <TrackingMap className="aspect-[16/10]" />
+          <TrackingMap className="aspect-[16/10]" mode="single" />
           <div className="mt-3 grid grid-cols-4 gap-2 text-xs">
             {[
               { l: "Distance", v: "412 km" },

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import "../styles.css";
+import "leaflet/dist/leaflet.css";
 
 export const viewport: Viewport = {
   width: "device-width",

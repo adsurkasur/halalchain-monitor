@@ -7,6 +7,6 @@ const RealTrackingMap = dynamic(
   { ssr: false, loading: () => <div className="h-full w-full bg-surface-muted animate-pulse rounded-xl border border-border" /> }
 );
 
-export function TrackingMap({ className, compact = false }: { className?: string; compact?: boolean }) {
-  return <RealTrackingMap className={className} compact={compact} />;
+export function TrackingMap({ className, compact = false, mode = "all" }: { className?: string; compact?: boolean; mode?: "all" | "single" }) {
+  return <RealTrackingMap className={className} compact={compact} mode={mode} />;
 }

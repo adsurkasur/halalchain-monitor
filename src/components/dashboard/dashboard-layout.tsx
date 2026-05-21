@@ -19,6 +19,7 @@ import {
   PanelLeftOpen,
   Moon,
   Sun,
+  LogOut,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { cn } from "@/lib/utils";
@@ -26,6 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { useAppStore } from "@/lib/store";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const NAV = [
   { href: "/app", label: "Overview", icon: LayoutGrid, exact: true, roles: ["sender", "admin"] },
@@ -95,6 +97,12 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
               </li>
             );
           })}
+          <li>
+            <Link href="/login" className="flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground">
+              <LogOut className="h-4 w-4 shrink-0" />
+              {!collapsed && <span>Sign out</span>}
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className="border-t border-sidebar-border p-3">
@@ -158,24 +166,45 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
               <Input placeholder="Search shipments, IDs, drivers…" className="h-9 pl-9 bg-surface-muted border-border" />
             </div>
           </div>
-          <div className="flex-1 md:hidden" />
+          <div className="flex-1" />
           <div className="flex items-center gap-2">
-            <span className="hidden items-center gap-1.5 rounded-full bg-status-safe-soft px-2.5 py-1 text-xs font-medium text-status-safe ring-1 ring-status-safe/20 sm:inline-flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-status-safe animate-pulse" /> Live · STELINA OK
-            </span>
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-status-critical" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-            <Button variant="ghost" size="icon"><HelpCircle className="h-4 w-4" /></Button>
+            <TooltipProvider>
+              <span className="hidden items-center gap-1.5 rounded-full bg-status-safe-soft px-2.5 py-1 text-xs font-medium text-status-safe ring-1 ring-status-safe/20 sm:inline-flex">
+                <span className="h-1.5 w-1.5 rounded-full bg-status-safe animate-pulse" /> Live · STELINA OK
+              </span>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/app/alerts">
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Bell className="h-4 w-4" />
+                      <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-status-critical" />
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>Alerts</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  >
+                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Toggle Theme</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/app/guide">
+                    <Button variant="ghost" size="icon"><HelpCircle className="h-4 w-4" /></Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>Operations Guide</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </header>
 

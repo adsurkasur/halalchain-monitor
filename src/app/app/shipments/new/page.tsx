@@ -171,9 +171,9 @@ export default function NewShipment() {
           </div>
           {step < 6 && (
             <div className="flex items-center justify-between border-t border-border bg-surface-muted px-6 py-4">
-              <Button variant="outline" onClick={prev} disabled={step === 0} className="gap-2"><ArrowLeft className="h-4 w-4" />Previous</Button>
+              <Button variant="outline" type="button" onClick={() => prev()} disabled={step === 0} className="gap-2"><ArrowLeft className="h-4 w-4" />Previous</Button>
               <div className="text-xs text-muted-foreground">All fields autosaved</div>
-              <Button onClick={next} className="gap-2">{step === 5 ? "Generate shipment" : "Continue"}<ArrowRight className="h-4 w-4" /></Button>
+              <Button type="button" onClick={() => next()} className="gap-2">{step === 5 ? "Generate shipment" : "Continue"}<ArrowRight className="h-4 w-4" /></Button>
             </div>
           )}
         </div>
