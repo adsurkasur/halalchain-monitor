@@ -47,7 +47,7 @@ export default function Login() {
             <div>
               <div className="flex items-center justify-between">
                 <Label>Password</Label>
-                <a href="#" className="text-xs font-medium text-primary hover:underline" onClick={(e) => e.preventDefault()}>Forgot password?</a>
+                <Link href="#" className="text-xs font-medium text-primary hover:underline">Forgot password?</Link>
               </div>
               <Input className="mt-1.5" type="password" placeholder="••••••••" />
             </div>

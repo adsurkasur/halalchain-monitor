@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Check, ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react";
+import { useAppStore } from "@/lib/store";
 
 const STEPS = [
   { t: "Sender", d: "Origin & contact" },
@@ -21,7 +22,32 @@ const STEPS = [
 
 export default function NewShipment() {
   const [step, setStep] = useState(0);
-  const next = () => setStep((s) => Math.min(STEPS.length - 1, s + 1));
+  const { addShipment } = useAppStore();
+
+  const next = () => {
+    if (step === 5) {
+      addShipment({
+        id: "SHP-24826",
+        product: "Frozen Tuna Loin",
+        weightKg: 1240,
+        origin: "PPS Nizam Zachman, Jakarta",
+        destination: "Cold Storage Surabaya",
+        receiver: "Cold Storage Surabaya",
+        driver: "Agus Pratama",
+        vehicle: "B 9821 RFC (Reefer)",
+        status: "In Transit",
+        integrity: "Maintained",
+        eta: "2026-05-20 18:40",
+        departedAt: new Date().toISOString().slice(0, 16).replace("T", " "),
+        tempC: -18.4,
+        humidity: 82,
+        progress: 0,
+        halalCertId: "MUI-LPPOM-00482-24",
+        stelinaRef: "STL-2024-019823",
+      });
+    }
+    setStep((s) => Math.min(STEPS.length - 1, s + 1));
+  };
   const prev = () => setStep((s) => Math.max(0, s - 1));
 
   return (
@@ -138,7 +164,7 @@ export default function NewShipment() {
                 </div>
                 <div className="flex gap-2">
                   <Link href="/app/shipments"><Button variant="outline">Back to shipments</Button></Link>
-                  <Link href="/app/shipments/SHP-24819"><Button>Open shipment</Button></Link>
+                  <Link href="/app/shipments/SHP-24826"><Button>Open shipment</Button></Link>
                 </div>
               </div>
             )}

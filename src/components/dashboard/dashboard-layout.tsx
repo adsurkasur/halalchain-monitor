@@ -17,19 +17,23 @@ import {
   HelpCircle,
   PanelLeftClose,
   PanelLeftOpen,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
+import { useAppStore } from "@/lib/store";
 
 const NAV = [
-  { href: "/app", label: "Overview", icon: LayoutGrid, exact: true },
-  { href: "/app/shipments", label: "Shipments", icon: Package },
-  { href: "/app/tracking", label: "Tracking", icon: Map },
-  { href: "/app/scan", label: "Scan Validation", icon: ScanLine },
-  { href: "/app/alerts", label: "Alerts", icon: Bell, badge: 5 },
-  { href: "/app/history", label: "History", icon: History },
+  { href: "/app", label: "Overview", icon: LayoutGrid, exact: true, roles: ["sender", "admin"] },
+  { href: "/app/shipments", label: "Shipments", icon: Package, roles: ["sender", "admin"] },
+  { href: "/app/tracking", label: "Tracking", icon: Map, roles: ["sender", "admin"] },
+  { href: "/app/scan", label: "Scan Validation", icon: ScanLine, roles: ["receiver", "admin"] },
+  { href: "/app/alerts", label: "Alerts", icon: Bell, badge: 5, roles: ["sender", "receiver", "admin"] },
+  { href: "/app/history", label: "History", icon: History, roles: ["sender", "receiver", "admin"] },
 ];
 
 const ACCOUNT = [
@@ -38,7 +42,10 @@ const ACCOUNT = [
 ];
 
 function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathname: string }) {
+  const { role, setRole } = useAppStore();
   const isActive = (href: string, exact?: boolean) => (exact ? pathname === href : pathname === href || pathname.startsWith(href + "/"));
+
+  const filteredNav = NAV.filter(item => item.roles.includes(role));
 
   return (
     <aside className={cn("flex h-full flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-200", collapsed ? "w-[68px]" : "w-64")}>
@@ -54,7 +61,7 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         {!collapsed && <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">Operations</div>}
         <ul className="space-y-0.5">
-          {NAV.map((item) => {
+          {filteredNav.map((item) => {
             const active = isActive(item.href, item.exact);
             return (
               <li key={item.href}>
@@ -91,17 +98,27 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
         </ul>
       </nav>
       <div className="border-t border-sidebar-border p-3">
-        {!collapsed ? (
-          <div className="flex items-center gap-3 rounded-md bg-sidebar-accent/50 px-2.5 py-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">AN</div>
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-xs font-semibold">Anwar Hidayat</div>
-              <div className="truncate text-[10px] text-sidebar-foreground/60">Operations · Company</div>
-            </div>
+        <button
+          onClick={() => setRole(role === "sender" ? "receiver" : "sender")}
+          className={cn(
+            "flex w-full items-center gap-3 rounded-md px-2.5 py-2 text-left transition-colors hover:bg-sidebar-accent/60",
+            !collapsed && "bg-sidebar-accent/50"
+          )}
+        >
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">
+            {role === "sender" ? "PT" : "RC"}
           </div>
-        ) : (
-          <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">AN</div>
-        )}
+          {!collapsed && (
+            <div className="min-w-0 flex-1">
+              <div className="truncate text-xs font-semibold">
+                {role === "sender" ? "PT Mina Bahari" : "Cold Storage SBY"}
+              </div>
+              <div className="truncate text-[10px] text-sidebar-foreground/60">
+                {role === "sender" ? "Role: Sender (Company)" : "Role: Receiver"}
+              </div>
+            </div>
+          )}
+        </button>
       </div>
     </aside>
   );
@@ -111,6 +128,7 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname() || "";
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background text-foreground">
@@ -148,6 +166,14 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-4 w-4" />
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-status-critical" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
             <Button variant="ghost" size="icon"><HelpCircle className="h-4 w-4" /></Button>
           </div>
