@@ -5,9 +5,18 @@ import { StatusBadge, statusTone } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { alerts } from "@/lib/mock-data";
-import { Search, Bell, Thermometer, Droplets, Signal, Route as RouteIcon, ShieldAlert } from "lucide-react";
+import {
+  Search,
+  Bell,
+  Thermometer,
+  Droplets,
+  Signal,
+  Route as RouteIcon,
+  ShieldAlert,
+  type LucideIcon,
+} from "lucide-react";
 
-const ICON: Record<string, any> = {
+const ICON: Record<string, LucideIcon> = {
   "Temperature Spike": Thermometer,
   "Humidity Warning": Droplets,
   "Sensor Disconnect": Signal,
@@ -18,16 +27,24 @@ const ICON: Record<string, any> = {
 
 export default function Alerts() {
   return (
-    <DashboardLayout title="Operational alerts" subtitle="Threshold breaches, sensor health, and integrity events.">
+    <DashboardLayout
+      title="Operational alerts"
+      subtitle="Threshold breaches, sensor health, and integrity events."
+    >
       <div className="grid gap-4 md:grid-cols-3">
         {[
           { l: "Critical", v: 2, tone: "critical" as const },
           { l: "Warning", v: 3, tone: "warning" as const },
           { l: "Info", v: 1, tone: "active" as const },
         ].map((c) => (
-          <div key={c.l} className="rounded-xl border border-border bg-surface p-5 shadow-card flex items-center justify-between">
+          <div
+            key={c.l}
+            className="rounded-xl border border-border bg-surface p-5 shadow-card flex items-center justify-between"
+          >
             <div>
-              <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{c.l}</div>
+              <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                {c.l}
+              </div>
               <div className="mt-2 text-3xl font-semibold tabular-nums">{c.v}</div>
             </div>
             <StatusBadge tone={c.tone}>{c.l}</StatusBadge>
@@ -41,7 +58,9 @@ export default function Alerts() {
           <Input className="h-9 pl-9 border-border bg-surface" placeholder="Search alerts…" />
         </div>
         {["All", "Critical", "Warning", "Info"].map((f, i) => (
-          <Button key={f} variant={i === 0 ? "default" : "outline"} size="sm" className="h-9">{f}</Button>
+          <Button key={f} variant={i === 0 ? "default" : "outline"} size="sm" className="h-9">
+            {f}
+          </Button>
         ))}
       </div>
 
@@ -51,20 +70,26 @@ export default function Alerts() {
             const Icon = ICON[a.type] || Bell;
             return (
               <li key={a.id} className="flex items-start gap-4 px-5 py-4 hover:bg-surface-muted/60">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${a.severity === "Critical" ? "bg-status-critical-soft text-status-critical" : a.severity === "Warning" ? "bg-status-warning-soft text-status-warning" : "bg-status-active-soft text-status-active"}`}>
+                <div
+                  className={`flex h-10 w-10 items-center justify-center rounded-lg ${a.severity === "Critical" ? "bg-status-critical-soft text-status-critical" : a.severity === "Warning" ? "bg-status-warning-soft text-status-warning" : "bg-status-active-soft text-status-active"}`}
+                >
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <div className="text-sm font-semibold">{a.type}</div>
-                    <StatusBadge tone={statusTone(a.severity)} dot={false}>{a.severity}</StatusBadge>
+                    <StatusBadge tone={statusTone(a.severity)} dot={false}>
+                      {a.severity}
+                    </StatusBadge>
                     <span className="font-mono text-xs text-primary">{a.shipment}</span>
                     <span className="text-xs text-muted-foreground">· {a.time}</span>
                   </div>
                   <div className="mt-1 text-sm text-muted-foreground">{a.message}</div>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
-                  <Button variant="outline" size="sm">View</Button>
+                  <Button variant="outline" size="sm">
+                    View
+                  </Button>
                   <Button size="sm">Acknowledge</Button>
                 </div>
               </li>

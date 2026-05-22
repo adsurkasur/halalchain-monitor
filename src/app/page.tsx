@@ -21,10 +21,14 @@ export default function Landing() {
     <MarketingLayout>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-surface-muted to-background">
-        <div className="absolute inset-0 -z-10 opacity-[0.35]" style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, oklch(0.85 0.02 220) 1px, transparent 0)",
-          backgroundSize: "28px 28px",
-        }} />
+        <div
+          className="absolute inset-0 -z-10 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, oklch(0.85 0.02 220) 1px, transparent 0)",
+            backgroundSize: "28px 28px",
+          }}
+        />
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground shadow-card">
@@ -37,13 +41,21 @@ export default function Landing() {
               <span className="text-primary">traceability</span>, in real time.
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Operational monitoring for Indonesia's fish logistics. GPS, temperature,
-              humidity, and RFID/NFC validation — unified into one auditable platform
-              built for halal integrity assurance.
+              Operational monitoring for Indonesia's fish logistics. GPS, temperature, humidity, and
+              RFID/NFC validation — unified into one auditable platform built for halal integrity
+              assurance.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/app"><Button size="lg" className="gap-2">Launch operations console <ArrowRight className="h-4 w-4" /></Button></Link>
-              <Link href="/features"><Button size="lg" variant="outline">Explore features</Button></Link>
+              <Link href="/app">
+                <Button size="lg" className="gap-2">
+                  Launch operations console <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/features">
+                <Button size="lg" variant="outline">
+                  Explore features
+                </Button>
+              </Link>
             </div>
             <div className="mt-10 grid max-w-md grid-cols-3 gap-6">
               {[
@@ -68,7 +80,9 @@ export default function Landing() {
                   <span className="h-1.5 w-1.5 rounded-full bg-status-safe animate-pulse" />
                   Live · SHP-24819
                 </div>
-                <div className="text-[10px] uppercase tracking-wider opacity-60">Operations Console</div>
+                <div className="text-[10px] uppercase tracking-wider opacity-60">
+                  Operations Console
+                </div>
               </div>
               <TrackingMap className="mt-3 aspect-[16/10]" />
               <div className="mt-3 grid grid-cols-3 gap-2">
@@ -78,7 +92,9 @@ export default function Landing() {
                   { i: ShieldCheck, l: "Halal", v: "Sealed", t: "text-primary" },
                 ].map((m) => (
                   <div key={m.l} className="rounded-lg border border-border bg-surface-muted p-2.5">
-                    <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground"><m.i className="h-3 w-3" /> {m.l}</div>
+                    <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                      <m.i className="h-3 w-3" /> {m.l}
+                    </div>
                     <div className={`mt-1 text-sm font-semibold ${m.t}`}>{m.v}</div>
                   </div>
                 ))}
@@ -91,10 +107,14 @@ export default function Landing() {
       {/* Trust strip */}
       <section className="border-b border-border bg-surface">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-6 py-6 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          <span>MUI LPPOM</span><span>·</span>
-          <span>KKP STELINA</span><span>·</span>
-          <span>BPOM Aligned</span><span>·</span>
-          <span>ISO 22000</span><span>·</span>
+          <span>MUI LPPOM</span>
+          <span>·</span>
+          <span>KKP STELINA</span>
+          <span>·</span>
+          <span>BPOM Aligned</span>
+          <span>·</span>
+          <span>ISO 22000</span>
+          <span>·</span>
           <span>GS1 Indonesia</span>
         </div>
       </section>
@@ -103,20 +123,54 @@ export default function Landing() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="max-w-2xl">
-            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Capabilities</div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">Built for operations, audited for trust.</h2>
-            <p className="mt-3 text-muted-foreground">Every signal from sensor to receiver is timestamped, signed, and verifiable — so halal integrity isn't a claim, it's a record.</p>
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Capabilities
+            </div>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+              Built for operations, audited for trust.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Every signal from sensor to receiver is timestamped, signed, and verifiable — so halal
+              integrity isn't a claim, it's a record.
+            </p>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { i: MapPin, t: "GPS Fleet Tracking", d: "Sub-30s telemetry, route corridors, deviation alerts, and replay-ready history." },
-              { i: Thermometer, t: "Cold Chain Monitoring", d: "Per-reefer temperature curves with threshold engine and recovery detection." },
-              { i: Droplets, t: "Humidity Assurance", d: "Continuous humidity logging tied to product profiles and storage SOPs." },
-              { i: Radio, t: "RFID / NFC Validation", d: "Tap-to-verify shipment authenticity at handover, with mismatch states." },
-              { i: ShieldCheck, t: "Halal Integrity Engine", d: "Seal events, contamination flags, and MUI LPPOM certificate binding." },
-              { i: Database, t: "STELINA Sync", d: "Two-way integration with Indonesia's National Fish Logistics registry." },
+              {
+                i: MapPin,
+                t: "GPS Fleet Tracking",
+                d: "Sub-30s telemetry, route corridors, deviation alerts, and replay-ready history.",
+              },
+              {
+                i: Thermometer,
+                t: "Cold Chain Monitoring",
+                d: "Per-reefer temperature curves with threshold engine and recovery detection.",
+              },
+              {
+                i: Droplets,
+                t: "Humidity Assurance",
+                d: "Continuous humidity logging tied to product profiles and storage SOPs.",
+              },
+              {
+                i: Radio,
+                t: "RFID / NFC Validation",
+                d: "Tap-to-verify shipment authenticity at handover, with mismatch states.",
+              },
+              {
+                i: ShieldCheck,
+                t: "Halal Integrity Engine",
+                d: "Seal events, contamination flags, and MUI LPPOM certificate binding.",
+              },
+              {
+                i: Database,
+                t: "STELINA Sync",
+                d: "Two-way integration with Indonesia's National Fish Logistics registry.",
+              },
             ].map((f) => (
-              <div key={f.t} className="group rounded-xl border border-border bg-surface p-6 transition-shadow hover:shadow-elevated">
+              <div
+                key={f.t}
+                className="group rounded-xl border border-border bg-surface p-6 transition-shadow hover:shadow-elevated"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-primary">
                   <f.i className="h-5 w-5" />
                 </div>
@@ -132,15 +186,35 @@ export default function Landing() {
       <section className="border-b border-border bg-surface-muted">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="text-center max-w-2xl mx-auto">
-            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Workflow</div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">From dock to receiver, fully traced.</h2>
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Workflow
+            </div>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+              From dock to receiver, fully traced.
+            </h2>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-4">
             {[
-              { n: "01", t: "Create Shipment", d: "Bind product, halal cert, and reefer profile to a unique shipment ID." },
-              { n: "02", t: "Seal & Depart", d: "RFID tag attached. Cold chain sealed. STELINA registry updated." },
-              { n: "03", t: "Live Monitor", d: "IoT telemetry streams to the operations console with alerting." },
-              { n: "04", t: "Validate Delivery", d: "Receiver scans NFC — integrity, temperature & timestamp logged." },
+              {
+                n: "01",
+                t: "Create Shipment",
+                d: "Bind product, halal cert, and reefer profile to a unique shipment ID.",
+              },
+              {
+                n: "02",
+                t: "Seal & Depart",
+                d: "RFID tag attached. Cold chain sealed. STELINA registry updated.",
+              },
+              {
+                n: "03",
+                t: "Live Monitor",
+                d: "IoT telemetry streams to the operations console with alerting.",
+              },
+              {
+                n: "04",
+                t: "Validate Delivery",
+                d: "Receiver scans NFC — integrity, temperature & timestamp logged.",
+              },
             ].map((s) => (
               <div key={s.n} className="rounded-xl border border-border bg-surface p-6">
                 <div className="font-mono text-xs font-semibold text-primary">{s.n}</div>
@@ -156,9 +230,16 @@ export default function Landing() {
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Real-time monitoring</div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">A control center for every reefer on the road.</h2>
-            <p className="mt-3 text-muted-foreground">See every vehicle, sensor, and shipment status in one operational view. Set thresholds per product profile. Recover from incidents before they become losses.</p>
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Real-time monitoring
+            </div>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+              A control center for every reefer on the road.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              See every vehicle, sensor, and shipment status in one operational view. Set thresholds
+              per product profile. Recover from incidents before they become losses.
+            </p>
             <ul className="mt-6 space-y-3">
               {[
                 "Live map with checkpoints, alerts, and ETA refinement",
@@ -185,7 +266,10 @@ export default function Landing() {
           <div className="rounded-2xl border border-border bg-surface p-8">
             <Truck className="h-8 w-8 text-primary" />
             <h3 className="mt-4 text-2xl font-semibold tracking-tight">Cold Chain Integrity</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Continuous reefer telemetry with intelligent threshold engines per fish product profile — from frozen tuna at -18°C to fresh snapper at 0–2°C.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Continuous reefer telemetry with intelligent threshold engines per fish product
+              profile — from frozen tuna at -18°C to fresh snapper at 0–2°C.
+            </p>
             <div className="mt-6 rounded-lg border border-border bg-surface-muted p-4">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-medium">Reefer B 9821 RFC</span>
@@ -193,8 +277,22 @@ export default function Landing() {
               </div>
               <div className="mt-3 h-20 w-full">
                 <svg viewBox="0 0 200 60" className="h-full w-full">
-                  <path d="M0,30 C20,28 30,32 50,30 C70,28 90,15 110,28 C130,40 150,30 200,32" fill="none" stroke="var(--primary)" strokeWidth="1.5" />
-                  <line x1="0" y1="15" x2="200" y2="15" stroke="var(--status-warning)" strokeDasharray="2 3" strokeWidth="1" opacity="0.6" />
+                  <path
+                    d="M0,30 C20,28 30,32 50,30 C70,28 90,15 110,28 C130,40 150,30 200,32"
+                    fill="none"
+                    stroke="var(--primary)"
+                    strokeWidth="1.5"
+                  />
+                  <line
+                    x1="0"
+                    y1="15"
+                    x2="200"
+                    y2="15"
+                    stroke="var(--status-warning)"
+                    strokeDasharray="2 3"
+                    strokeWidth="1"
+                    opacity="0.6"
+                  />
                 </svg>
               </div>
             </div>
@@ -202,10 +300,16 @@ export default function Landing() {
           <div className="rounded-2xl border border-border bg-surface p-8">
             <Radio className="h-8 w-8 text-primary" />
             <h3 className="mt-4 text-2xl font-semibold tracking-tight">RFID / NFC Validation</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Tap the receiver's mobile device to a sealed shipment tag — instantly verify authenticity, halal seal, and cold chain integrity at delivery.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Tap the receiver's mobile device to a sealed shipment tag — instantly verify
+              authenticity, halal seal, and cold chain integrity at delivery.
+            </p>
             <div className="mt-6 grid grid-cols-3 gap-2 text-center text-xs">
               {["Shipment match", "Seal intact", "Temp in range"].map((l) => (
-                <div key={l} className="rounded-lg border border-status-safe/30 bg-status-safe-soft px-2 py-3 text-status-safe">
+                <div
+                  key={l}
+                  className="rounded-lg border border-status-safe/30 bg-status-safe-soft px-2 py-3 text-status-safe"
+                >
                   <CheckCircle2 className="mx-auto h-4 w-4" />
                   <div className="mt-1.5 font-medium">{l}</div>
                 </div>
@@ -224,8 +328,13 @@ export default function Landing() {
                 <div className="inline-flex items-center gap-2 rounded-full border border-sidebar-border bg-sidebar-accent/40 px-3 py-1 text-xs font-medium">
                   <Database className="h-3 w-3" /> STELINA Integration
                 </div>
-                <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Synced with Indonesia's national fish traceability registry.</h2>
-                <p className="mt-3 text-sm text-sidebar-foreground/70 md:text-base">Every shipment is mirrored to STELINA with origin, vessel, processing unit, and chain-of-custody metadata — no manual paperwork at the dock.</p>
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+                  Synced with Indonesia's national fish traceability registry.
+                </h2>
+                <p className="mt-3 text-sm text-sidebar-foreground/70 md:text-base">
+                  Every shipment is mirrored to STELINA with origin, vessel, processing unit, and
+                  chain-of-custody metadata — no manual paperwork at the dock.
+                </p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
@@ -234,8 +343,13 @@ export default function Landing() {
                   { l: "Processing unit", v: "Verified" },
                   { l: "Chain of custody", v: "Continuous" },
                 ].map((m) => (
-                  <div key={m.l} className="rounded-lg border border-sidebar-border bg-sidebar-accent/40 p-4">
-                    <div className="text-[10px] uppercase tracking-wider text-sidebar-foreground/60">{m.l}</div>
+                  <div
+                    key={m.l}
+                    className="rounded-lg border border-sidebar-border bg-sidebar-accent/40 p-4"
+                  >
+                    <div className="text-[10px] uppercase tracking-wider text-sidebar-foreground/60">
+                      {m.l}
+                    </div>
                     <div className="mt-1 text-base font-semibold">{m.v}</div>
                   </div>
                 ))}
@@ -251,7 +365,9 @@ export default function Landing() {
           <div className="rounded-2xl border border-border bg-surface p-6 shadow-elevated">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold">On-time delivery rate</div>
-              <span className="rounded-full bg-status-safe-soft px-2 py-0.5 text-xs font-medium text-status-safe">+4.2% MoM</span>
+              <span className="rounded-full bg-status-safe-soft px-2 py-0.5 text-xs font-medium text-status-safe">
+                +4.2% MoM
+              </span>
             </div>
             <div className="mt-4 grid grid-cols-7 items-end gap-2 h-40">
               {[60, 72, 65, 80, 76, 88, 92].map((h, i) => (
@@ -259,13 +375,22 @@ export default function Landing() {
               ))}
             </div>
             <div className="mt-2 grid grid-cols-7 gap-2 text-center text-[10px] text-muted-foreground">
-              {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((d) => <div key={d}>{d}</div>)}
+              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                <div key={d}>{d}</div>
+              ))}
             </div>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-primary">Operational analytics</div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">Insights your auditors will thank you for.</h2>
-            <p className="mt-3 text-muted-foreground">Roll-ups across fleets, routes, products, and receivers — with drill-down to the individual sensor sample. Export to CSV or push to BI tools.</p>
+            <div className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Operational analytics
+            </div>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+              Insights your auditors will thank you for.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Roll-ups across fleets, routes, products, and receivers — with drill-down to the
+              individual sensor sample. Export to CSV or push to BI tools.
+            </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 { i: Activity, t: "Incident MTTR" },
@@ -273,7 +398,10 @@ export default function Landing() {
                 { i: ShieldCheck, t: "Integrity scorecard" },
                 { i: Truck, t: "Ree tracking" },
               ].map((x) => (
-                <li key={x.t} className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm">
+                <li
+                  key={x.t}
+                  className="flex items-center gap-2.5 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm"
+                >
                   <x.i className="h-4 w-4 text-primary" /> {x.t}
                 </li>
               ))}
@@ -285,11 +413,24 @@ export default function Landing() {
       {/* CTA */}
       <section>
         <div className="mx-auto max-w-5xl px-6 py-24 text-center">
-          <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">Bring every shipment under one operational lens.</h2>
-          <p className="mt-4 text-base text-muted-foreground md:text-lg">Designed for fishery exporters, cold storage operators, and receivers who treat halal integrity as a non-negotiable.</p>
+          <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
+            Bring every shipment under one operational lens.
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            Designed for fishery exporters, cold storage operators, and receivers who treat halal
+            integrity as a non-negotiable.
+          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/app"><Button size="lg" className="gap-2">Open the console <ArrowRight className="h-4 w-4" /></Button></Link>
-            <Link href="/contact"><Button size="lg" variant="outline">Talk to operations</Button></Link>
+            <Link href="/app">
+              <Button size="lg" className="gap-2">
+                Open the console <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button size="lg" variant="outline">
+                Talk to operations
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

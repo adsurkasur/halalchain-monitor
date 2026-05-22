@@ -34,7 +34,13 @@ const NAV = [
   { href: "/app/shipments", label: "Shipments", icon: Package, roles: ["sender", "admin"] },
   { href: "/app/tracking", label: "Tracking", icon: Map, roles: ["sender", "admin"] },
   { href: "/app/scan", label: "Scan Validation", icon: ScanLine, roles: ["receiver", "admin"] },
-  { href: "/app/alerts", label: "Alerts", icon: Bell, badge: 5, roles: ["sender", "receiver", "admin"] },
+  {
+    href: "/app/alerts",
+    label: "Alerts",
+    icon: Bell,
+    badge: 5,
+    roles: ["sender", "receiver", "admin"],
+  },
   { href: "/app/history", label: "History", icon: History, roles: ["sender", "receiver", "admin"] },
 ];
 
@@ -45,23 +51,43 @@ const ACCOUNT = [
 
 function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathname: string }) {
   const { role, setRole } = useAppStore();
-  const isActive = (href: string, exact?: boolean) => (exact ? pathname === href : pathname === href || pathname.startsWith(href + "/"));
+  const isActive = (href: string, exact?: boolean) =>
+    exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
 
-  const filteredNav = NAV.filter(item => item.roles.includes(role));
+  const filteredNav = NAV.filter((item) => item.roles.includes(role));
 
   return (
-    <aside className={cn("flex h-full flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-200", collapsed ? "w-[68px]" : "w-64")}>
+    <aside
+      className={cn(
+        "flex h-full flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-200",
+        collapsed ? "w-[68px]" : "w-64",
+      )}
+    >
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-4">
         {collapsed ? (
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12c3-4 7-4 10 0s7 4 10 0" /></svg>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M2 12c3-4 7-4 10 0s7 4 10 0" />
+            </svg>
           </div>
         ) : (
           <BrandLogo variant="light" />
         )}
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-4">
-        {!collapsed && <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">Operations</div>}
+        {!collapsed && (
+          <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">
+            Operations
+          </div>
+        )}
         <ul className="space-y-0.5">
           {filteredNav.map((item) => {
             const active = isActive(item.href, item.exact);
@@ -71,26 +97,42 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
                   href={item.href}
                   className={cn(
                     "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
-                    active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
+                    active
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                      : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
                   )}
                 >
                   <item.icon className="h-4 w-4 shrink-0" />
                   {!collapsed && <span className="flex-1">{item.label}</span>}
                   {!collapsed && item.badge && (
-                    <span className="rounded-full bg-status-critical px-1.5 py-px text-[10px] font-semibold text-white">{item.badge}</span>
+                    <span className="rounded-full bg-status-critical px-1.5 py-px text-[10px] font-semibold text-white">
+                      {item.badge}
+                    </span>
                   )}
                 </Link>
               </li>
             );
           })}
         </ul>
-        {!collapsed && <div className="mt-6 mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">Account</div>}
+        {!collapsed && (
+          <div className="mt-6 mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/50">
+            Account
+          </div>
+        )}
         <ul className="space-y-0.5">
           {ACCOUNT.map((item) => {
             const active = isActive(item.href);
             return (
               <li key={item.href}>
-                <Link href={item.href} className={cn("flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors", active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground")}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors",
+                    active
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                      : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
+                  )}
+                >
                   <item.icon className="h-4 w-4 shrink-0" />
                   {!collapsed && <span>{item.label}</span>}
                 </Link>
@@ -98,7 +140,10 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
             );
           })}
           <li>
-            <Link href="/login" className="flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground">
+            <Link
+              href="/login"
+              className="flex items-center gap-3 rounded-md px-2.5 py-2 text-sm font-medium transition-colors text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
+            >
               <LogOut className="h-4 w-4 shrink-0" />
               {!collapsed && <span>Sign out</span>}
             </Link>
@@ -110,7 +155,7 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
           onClick={() => setRole(role === "sender" ? "receiver" : "sender")}
           className={cn(
             "flex w-full items-center gap-3 rounded-md px-2.5 py-2 text-left transition-colors hover:bg-sidebar-accent/60",
-            !collapsed && "bg-sidebar-accent/50"
+            !collapsed && "bg-sidebar-accent/50",
           )}
         >
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">
@@ -132,7 +177,17 @@ function SidebarComponent({ collapsed, pathname }: { collapsed: boolean; pathnam
   );
 }
 
-export function DashboardLayout({ children, title, subtitle, actions }: { children: React.ReactNode; title?: string; subtitle?: string; actions?: React.ReactNode }) {
+export function DashboardLayout({
+  children,
+  title,
+  subtitle,
+  actions,
+}: {
+  children: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+  actions?: React.ReactNode;
+}) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname() || "";
@@ -157,20 +212,32 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
           <button onClick={() => setMobileOpen(true)} className="md:hidden" aria-label="Open menu">
             <Menu className="h-5 w-5" />
           </button>
-          <button onClick={() => setCollapsed((c) => !c)} className="hidden text-muted-foreground hover:text-foreground md:inline-flex" aria-label="Toggle sidebar">
-            {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+          <button
+            onClick={() => setCollapsed((c) => !c)}
+            className="hidden text-muted-foreground hover:text-foreground md:inline-flex"
+            aria-label="Toggle sidebar"
+          >
+            {collapsed ? (
+              <PanelLeftOpen className="h-4 w-4" />
+            ) : (
+              <PanelLeftClose className="h-4 w-4" />
+            )}
           </button>
           <div className="hidden flex-1 max-w-md md:block">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Search shipments, IDs, drivers…" className="h-9 pl-9 bg-surface-muted border-border" />
+              <Input
+                placeholder="Search shipments, IDs, drivers…"
+                className="h-9 pl-9 bg-surface-muted border-border"
+              />
             </div>
           </div>
           <div className="flex-1" />
           <div className="flex items-center gap-2">
             <TooltipProvider>
               <span className="hidden items-center gap-1.5 rounded-full bg-status-safe-soft px-2.5 py-1 text-xs font-medium text-status-safe ring-1 ring-status-safe/20 sm:inline-flex">
-                <span className="h-1.5 w-1.5 rounded-full bg-status-safe animate-pulse" /> Live · STELINA OK
+                <span className="h-1.5 w-1.5 rounded-full bg-status-safe animate-pulse" /> Live ·
+                STELINA OK
               </span>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -199,7 +266,9 @@ export function DashboardLayout({ children, title, subtitle, actions }: { childr
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link href="/app/guide">
-                    <Button variant="ghost" size="icon"><HelpCircle className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon">
+                      <HelpCircle className="h-4 w-4" />
+                    </Button>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>Operations Guide</TooltipContent>

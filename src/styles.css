@@ -62,7 +62,8 @@
   --color-chart-5: var(--chart-5);
 
   --shadow-card: 0 1px 2px 0 oklch(0.2 0.04 220 / 0.04), 0 1px 3px 0 oklch(0.2 0.04 220 / 0.06);
-  --shadow-elevated: 0 4px 12px -2px oklch(0.2 0.04 220 / 0.08), 0 2px 6px -1px oklch(0.2 0.04 220 / 0.05);
+  --shadow-elevated:
+    0 4px 12px -2px oklch(0.2 0.04 220 / 0.08), 0 2px 6px -1px oklch(0.2 0.04 220 / 0.05);
 }
 
 :root {
@@ -153,13 +154,23 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body { font-family: var(--font-sans); }
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-feature-settings: "cv11", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
 }

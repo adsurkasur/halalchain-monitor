@@ -1,7 +1,7 @@
-import { create } from 'zustand';
-import { shipments as initialShipments, Shipment } from './mock-data';
+import { create } from "zustand";
+import { shipments as initialShipments, Shipment } from "./mock-data";
 
-export type Role = 'sender' | 'receiver';
+export type Role = "sender" | "receiver";
 
 interface AppState {
   role: Role;
@@ -11,7 +11,7 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  role: 'sender',
+  role: "sender",
   setRole: (role) => set({ role }),
   shipments: initialShipments,
   addShipment: (shipment) => set((state) => ({ shipments: [shipment, ...state.shipments] })),
