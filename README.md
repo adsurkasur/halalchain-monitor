@@ -1,6 +1,6 @@
 # HalalChain Monitor
 
-**This repository has moved to a private repository: https://github.com/Joe-Yuka/RFID-HTAS-25-26**
+**This repository has moved to a private repository: [https://github.com/Joe-Yuka/RFID-HTAS-25-26](https://github.com/Joe-Yuka/RFID-HTAS-25-26)**
 
 ## Old Repository
 
